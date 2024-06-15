@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Learning Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #game {
+            width: 80%;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #game h1 {
+            text-align: center;
+        }
+        .command {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .interactive-element {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            background: #007BFF;
+            color: #fff;
+        }
+        .interactive-element:hover {
+            background: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <h1>Learn Git - Intermediate Level</h1>
+        <div id="intro">
+            <p>Welcome to the Git Learning Game! In this game, you'll learn intermediate Git commands and concepts through interactive exercises.</p>
+            <button id="startBtn" class="interactive-element">Start Learning</button>
+        </div>
+        <div id="level1" class="hidden">
+            <h2>Level 1: Branching</h2>
+            <p>Let's start with branching. Use the command <code>git branch feature-branch</code> to create a new branch called 'feature-branch'.</p>
+            <div class="command">
+                <label for="level1Input">Enter command:</label>
+                <input type="text" id="level1Input">
+                <button id="level1Btn" class="interactive-element">Submit</button>
+            </div>
+            <p id="level1Feedback" class="hidden"></p>
+        </div>
+        <div id="level2" class="hidden">
+            <h2>Level 2: Merging</h2>
+            <p>Great! Now, merge 'feature-branch' into 'main'. Use <code>git checkout main</code> and then <code>git merge feature-branch</code>.</p>
+            <div class="command">
+                <label for="level2Input1">Enter first command:</label>
+                <input type="text" id="level2Input1">
+                <label for="level2Input2">Enter second command:</label>
+                <input type="text" id="level2Input2">
+                <button id="level2Btn" class="interactive-element">Submit</button>
+            </div>
+            <p id="level2Feedback" class="hidden"></p>
+        </div>
+        <div id="completion" class="hidden">
+            <h2>Congratulations!</h2>
+            <p>You've completed the intermediate Git learning game. Keep practicing and exploring more Git commands.</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('startBtn').addEventListener('click', function() {
+            document.getElementById('intro').classList.add('hidden');
+            document.getElementById('level1').classList.remove('hidden');
+        });
+
+        document.getElementById('level1Btn').addEventListener('click', function() {
+            const userInput = document.getElementById('level1Input').value.trim();
+            if (userInput === 'git branch feature-branch') {
+                document.getElementById('level1Feedback').textContent = 'Correct! You created a new branch.';
+                document.getElementById('level1Feedback').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('level1').classList.add('hidden');
+                    document.getElementById('level2').classList.remove('hidden');
+                }, 2000);
+            } else {
+                document.getElementById('level1Feedback').textContent = 'Incorrect command. Try again.';
+                document.getElementById('level1Feedback').classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('level2Btn').addEventListener('click', function() {
+            const userCommand1 = document.getElementById('level2Input1').value.trim();
+            const userCommand2 = document.getElementById('level2Input2').value.trim();
+            if (userCommand1 === 'git checkout main' && userCommand2 === 'git merge feature-branch') {
+                document.getElementById('level2Feedback').textContent = 'Correct! You merged the feature-branch into main.';
+                document.getElementById('level2Feedback').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('level2').classList.add('hidden');
+                    document.getElementById('completion').classList.remove('hidden');
+                }, 2000);
+            } else {
+                document.getElementById('level2Feedback').textContent = 'Incorrect commands. Try again.';
+                document.getElementById('level2Feedback').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
+
